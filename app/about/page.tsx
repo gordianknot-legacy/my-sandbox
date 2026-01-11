@@ -163,14 +163,13 @@ export default function About() {
                 <h2 className="text-3xl font-bold mb-6">About Me</h2>
                 <div className="prose prose-invert prose-zinc max-w-none">
                   <p className="text-lg text-zinc-400 leading-relaxed mb-4">
-                    I&apos;m a developer passionate about building at the intersection of AI and developer tools. 
+                    I&apos;m a product guy passionate about building things at the intersection of technology and social impact. 
                     My journey started with traditional web development, but I&apos;ve increasingly focused on 
                     leveraging large language models to create innovative solutions.
                   </p>
                   <p className="text-lg text-zinc-400 leading-relaxed">
-                    WHYBE.AI is my sandbox for experimentation—a place where I prototype ideas, build 
-                    white-label tools, and explore what&apos;s possible with modern AI. I believe in building 
-                    in public and sharing the journey.
+                    WHYBE.AI is my sandbox for experimentation, a place where I prototype ideas, build 
+                    open-source tools, and explore what&apos;s possible with modern AI.
                   </p>
                 </div>
               </section>
