@@ -33,16 +33,14 @@ export default function About() {
       degree: "Executive Program in Public Policy & Management",
       school: "Indian Institute of Management Calcutta",
       period: "2023 - 2024",
-      description: "Policymaking in India, Challenges in education and sustainability regualtions"
-    }
-
-    {  
+      description: "Policymaking in India, Challenges in education and sustainability regulations"
+    },
+    {
       degree: "Master of Arts in Development Studies",
       school: "Tata Institute of Social Sciences",
       period: "2021 - 2023",
       description: "Theories of development, human rights & violence and modernity"
-    }
-    
+    },
     {
       degree: "Bachelor of Technology in Computer Science",
       school: "Amrita University",
