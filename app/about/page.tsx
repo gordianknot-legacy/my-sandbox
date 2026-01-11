@@ -30,10 +30,24 @@ export default function About() {
 
   const education = [
     {
-      degree: "Bachelor of Science in Computer Science",
-      school: "University Name",
-      period: "2016 - 2020",
-      description: "Focus on software engineering, algorithms, and distributed systems."
+      degree: "Executive Program in Public Policy & Management",
+      school: "Indian Institute of Management Calcutta",
+      period: "2023 - 2024",
+      description: "Policymaking in India, Challenges in education and sustainability regualtions"
+    }
+
+    {  
+      degree: "Master of Arts in Development Studies",
+      school: "Tata Institute of Social Sciences",
+      period: "2021 - 2023",
+      description: "Theories of development, human rights & violence and modernity"
+    }
+    
+    {
+      degree: "Bachelor of Technology in Computer Science",
+      school: "Amrita University",
+      period: "2013 - 2017",
+      description: "Focus on data mining and DevOps"
     }
   ];
 
@@ -318,7 +332,7 @@ export default function About() {
             WHYBE<span className="text-lime-400">.AI</span>
           </div>
           <div className="text-sm text-zinc-600">
-            Built with curiosity • Deployed on Vercel • Status: <span className="text-lime-400">Constantly Evolving</span>
+            "That the speed of light is a limit is a theory; that Superman can travel faster than light is a fact." — Isaac Asimov • Status: <span className="text-lime-400">Constantly Evolving</span>
           </div>
           <div className="flex gap-4">
             <a href="https://github.com/gordianknot-legacy/my-sandbox" 
