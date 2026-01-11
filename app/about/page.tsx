@@ -1,5 +1,7 @@
+"use client";
+
 import React from 'react';
-import { Github, Linkedin, Mail, ArrowUpRight, Download, MapPin, Calendar, Briefcase, GraduationCap, Award, ExternalLink, ChevronRight, ArrowLeft } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUpRight, Download, MapPin, Calendar, Briefcase, GraduationCap, Award, ArrowLeft } from 'lucide-react';
 
 export default function About() {
   const experience = [
@@ -91,7 +93,7 @@ export default function About() {
                     W
                   </div>
                   <h1 className="text-2xl font-bold text-center mb-2">The Maker</h1>
-                  <p className="text-zinc-500 text-center text-sm mb-6">AI Developer & Builder</p>
+                  <p className="text-zinc-500 text-center text-sm mb-6">AI Developer &amp; Builder</p>
                   
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-3 text-sm text-zinc-400">
@@ -149,13 +151,13 @@ export default function About() {
                 <h2 className="text-3xl font-bold mb-6">About Me</h2>
                 <div className="prose prose-invert prose-zinc max-w-none">
                   <p className="text-lg text-zinc-400 leading-relaxed mb-4">
-                    I'm a developer passionate about building at the intersection of AI and developer tools. 
-                    My journey started with traditional web development, but I've increasingly focused on 
+                    I&apos;m a developer passionate about building at the intersection of AI and developer tools. 
+                    My journey started with traditional web development, but I&apos;ve increasingly focused on 
                     leveraging large language models to create innovative solutions.
                   </p>
                   <p className="text-lg text-zinc-400 leading-relaxed">
                     WHYBE.AI is my sandbox for experimentation—a place where I prototype ideas, build 
-                    white-label tools, and explore what's possible with modern AI. I believe in building 
+                    white-label tools, and explore what&apos;s possible with modern AI. I believe in building 
                     in public and sharing the journey.
                   </p>
                 </div>
@@ -205,7 +207,7 @@ export default function About() {
                   <div className="p-2 bg-amber-400/10 rounded-xl">
                     <Award className="text-amber-400" size={20} />
                   </div>
-                  <h2 className="text-2xl font-bold">Skills & Technologies</h2>
+                  <h2 className="text-2xl font-bold">Skills &amp; Technologies</h2>
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -287,9 +289,9 @@ export default function About() {
 
               {/* CTA */}
               <section className="rounded-3xl bg-gradient-to-br from-fuchsia-950/50 via-zinc-950 to-zinc-950 border border-fuchsia-500/20 p-8">
-                <h3 className="text-2xl font-bold mb-3">Let's Work Together</h3>
+                <h3 className="text-2xl font-bold mb-3">Let&apos;s Work Together</h3>
                 <p className="text-zinc-400 mb-6">
-                  Interested in collaborating or have a project in mind? I'm always open to discussing new opportunities.
+                  Interested in collaborating or have a project in mind? I&apos;m always open to discussing new opportunities.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a href="/#prototype-request" 
