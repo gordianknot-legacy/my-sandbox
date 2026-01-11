@@ -432,7 +432,7 @@ export default function Home() {
             WHYBE<span className="text-lime-400">.AI</span>
           </div>
           <div className="text-sm text-zinc-600">
-            Built with curiosity • Deployed on Vercel • Status: <span className="text-lime-400">Constantly Evolving</span>
+            "Any sufficiently advanced technology is indistinguishable from magic." — Arthur C. Clarke • Status: <span className="text-lime-400">Constantly Evolving</span>
           </div>
           <div className="flex gap-4">
             <a href="https://github.com/gordianknot-legacy/my-sandbox" 
