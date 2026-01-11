@@ -6,25 +6,25 @@ import { Github, Linkedin, Mail, ArrowUpRight, Download, MapPin, Calendar, Brief
 export default function About() {
   const experience = [
     {
-      role: "AI Developer & Founder",
-      company: "WHYBE.AI",
-      period: "2024 - Present",
+      role: "Senior Project Manager",
+      company: "Central Square Foundation",
+      period: "2023 - Present",
       description: "Building white-label AI tools and prototypes. Exploring LLM applications, prompt engineering, and developer tooling.",
-      tags: ["Gemini API", "React", "TypeScript", "Cloudflare"]
+      tags: ["Claude API", "Python", "AWS S3", "Cloudflare"]
     },
     {
-      role: "Software Engineer",
-      company: "Previous Company",
-      period: "2022 - 2024",
-      description: "Developed full-stack applications with focus on performance and user experience. Led migration to modern tech stack.",
-      tags: ["Node.js", "React", "PostgreSQL", "AWS"]
-    },
-    {
-      role: "Junior Developer",
-      company: "Tech Startup",
+      role: "Freelance Project Manager",
+      company: "Multiple",
       period: "2020 - 2022",
-      description: "Built and maintained web applications. Collaborated with design team to implement responsive UI components.",
-      tags: ["JavaScript", "Vue.js", "CSS", "Git"]
+      description: "Worked on consulting projects pertaining to web development and databse management for public health organisations",
+      tags: ["Node.js", "SEO", "MySQL", "Microsoft Excel"]
+    },
+    {
+      role: "Business Manager",
+      company: "Internshala",
+      period: "2017 - 2019",
+      description: "Built and maintained an internal product for core operations",
+      tags: ["Balsamiq", "MySQL", "CSS", "Git"]
     }
   ];
 
@@ -50,9 +50,9 @@ export default function About() {
   ];
 
   const skills = {
-    "Languages": ["TypeScript", "JavaScript", "Python", "SQL", "HTML/CSS"],
-    "Frameworks": ["React", "Next.js", "Node.js", "FastAPI", "Tailwind CSS"],
-    "AI/ML": ["LangChain", "Gemini API", "OpenAI API", "RAG", "Prompt Engineering"],
+    "Languages": ["Python", "SQL", "HTML/CSS"],
+    "Frameworks": ["React", "FastAPI", "Tailwind CSS"],
+    "AI/ML": ["LangChain", "OpenAI API", "RAG", "Prompt Engineering"],
     "Tools": ["Git", "Docker", "Vercel", "Cloudflare Workers", "PostgreSQL"]
   };
 
