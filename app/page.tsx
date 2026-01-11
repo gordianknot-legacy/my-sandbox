@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useState } from 'react';
-import { Github, ExternalLink, User, Code, Mail, ArrowUpRight, Sparkles, Layers, ChevronRight, Send, Lightbulb, Zap, Clock } from 'lucide-react';
+import { Github, ExternalLink, Mail, ArrowUpRight, Sparkles, ChevronRight, Send, Lightbulb, Zap, Clock, Code } from 'lucide-react';
 
 export default function Home() {
-  const [hoveredProject, setHoveredProject] = useState(null);
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,14 +14,13 @@ export default function Home() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log('Form submitted:', formData);
     setFormSubmitted(true);
     setTimeout(() => setFormSubmitted(false), 5000);
@@ -32,7 +33,6 @@ export default function Home() {
       description: "White-label code snapshots powered by Gemini API. Embed anywhere.",
       tags: ["Gemini", "React", "API"],
       status: "Live",
-      color: "from-lime-400 to-emerald-500"
     },
     {
       id: 2,
@@ -40,7 +40,6 @@ export default function Home() {
       description: "Intelligent context management for LLM applications.",
       tags: ["LLM", "Python", "RAG"],
       status: "Beta",
-      color: "from-amber-400 to-orange-500"
     },
     {
       id: 3,
@@ -48,7 +47,6 @@ export default function Home() {
       description: "Experimental playground for prompt engineering patterns.",
       tags: ["Prompts", "Testing", "UI"],
       status: "WIP",
-      color: "from-fuchsia-400 to-purple-500"
     }
   ];
 
@@ -89,7 +87,7 @@ export default function Home() {
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
             AI Projects<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-emerald-400 to-teal-400">
-              & Experiments
+              &amp; Experiments
             </span>
           </h1>
           <p className="text-xl text-zinc-400 max-w-xl leading-relaxed mb-10">
@@ -190,7 +188,7 @@ export default function Home() {
             </div>
 
             {/* Project Cards */}
-            {projects.slice(1).map((project, index) => (
+            {projects.slice(1).map((project) => (
               <div 
                 key={project.id}
                 className="group rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-6 hover:border-white/20 transition-all duration-500 cursor-pointer"
@@ -230,7 +228,7 @@ export default function Home() {
                     at the intersection of artificial intelligence and developer tools.
                   </p>
                   <a href="/about" className="inline-flex items-center gap-2 px-4 py-2 bg-fuchsia-400/10 text-fuchsia-400 rounded-full text-sm font-medium hover:bg-fuchsia-400/20 transition-colors">
-                    View Full Profile & Resume <ArrowUpRight size={16} />
+                    View Full Profile &amp; Resume <ArrowUpRight size={16} />
                   </a>
                 </div>
               </div>
@@ -239,7 +237,7 @@ export default function Home() {
             {/* Contact Card */}
             <div className="group rounded-3xl bg-gradient-to-br from-lime-950/30 to-zinc-950 border border-lime-400/20 p-6 hover:border-lime-400/40 transition-all duration-500 cursor-pointer">
               <Mail className="text-lime-400 mb-4" size={28} />
-              <h3 className="font-bold text-lg mb-2">Let's Connect</h3>
+              <h3 className="font-bold text-lg mb-2">Let&apos;s Connect</h3>
               <p className="text-sm text-zinc-500 mb-4">Open to opportunities and collaborations.</p>
               <div className="flex items-center gap-1 text-lime-400 text-sm font-medium group-hover:gap-2 transition-all">
                 Get in Touch <ChevronRight size={16} />
@@ -280,7 +278,7 @@ export default function Home() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400"> AI Prototype</span>
               </h2>
               <p className="text-lg text-zinc-400 mb-8 leading-relaxed">
-                Have a concept for an AI-powered tool or application? I'll build a working prototype to help you validate your idea and explore possibilities.
+                Have a concept for an AI-powered tool or application? I&apos;ll build a working prototype to help you validate your idea and explore possibilities.
               </p>
               
               <div className="space-y-6">
@@ -290,7 +288,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Share Your Vision</h4>
-                    <p className="text-sm text-zinc-500">Describe your idea, target users, and the problem you're solving.</p>
+                    <p className="text-sm text-zinc-500">Describe your idea, target users, and the problem you&apos;re solving.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -299,7 +297,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Rapid Prototyping</h4>
-                    <p className="text-sm text-zinc-500">I'll build a functional prototype using the latest AI tools and frameworks.</p>
+                    <p className="text-sm text-zinc-500">I&apos;ll build a functional prototype using the latest AI tools and frameworks.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -322,10 +320,10 @@ export default function Home() {
                     <Sparkles className="text-teal-400" size={32} />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Request Received!</h3>
-                  <p className="text-zinc-400">I'll review your idea and get back to you soon.</p>
+                  <p className="text-zinc-400">I&apos;ll review your idea and get back to you soon.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-zinc-300 mb-2">
@@ -409,7 +407,8 @@ export default function Home() {
                   </div>
 
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={handleSubmit}
                     className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-teal-400 to-cyan-400 text-black font-bold rounded-xl hover:from-teal-300 hover:to-cyan-300 transition-all"
                   >
                     Submit Request
@@ -419,7 +418,7 @@ export default function Home() {
                   <p className="text-xs text-zinc-600 text-center">
                     By submitting, you agree to be contacted about your prototype request.
                   </p>
-                </form>
+                </div>
               )}
             </div>
           </div>
