@@ -59,8 +59,8 @@ export default function About() {
   };
 
   const certifications = [
-    { name: "Google Cloud Professional", issuer: "Google", year: "2024" },
-    { name: "AWS Solutions Architect", issuer: "Amazon", year: "2023" }
+    { name: "SQL (Advanced)", issuer: "HackerRank", year: "2025" },
+    { name: "AI Practioner", issuer: "Amazon Web Services", year: "2026" }
   ];
 
   return (
