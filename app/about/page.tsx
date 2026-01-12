@@ -105,16 +105,16 @@ export default function About() {
                     W
                   </div>
                   <h1 className="text-2xl font-bold text-center mb-2">The Maker</h1>
-                  <p className="text-zinc-500 text-center text-sm mb-6">AI Developer &amp; Builder</p>
+                  <p className="text-zinc-500 text-center text-sm mb-6">AI Products &amp; Public Policy</p>
                   
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-3 text-sm text-zinc-400">
                       <MapPin size={16} className="text-fuchsia-400" />
-                      <span>Remote / Worldwide</span>
+                      <span>India / Remote</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-zinc-400">
                       <Briefcase size={16} className="text-fuchsia-400" />
-                      <span>Open to Opportunities</span>
+                      <span>Central Square Foundation</span>
                     </div>
                   </div>
 
