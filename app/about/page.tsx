@@ -129,7 +129,7 @@ export default function About() {
                        className="flex-1 flex items-center justify-center gap-2 py-2 bg-white/5 hover:bg-white/10 rounded-xl transition-colors">
                       <Linkedin size={18} />
                     </a>
-                    <a href="#" 
+                    <a href="mailto:g.anirudh.sharma@gmail.com"
                        className="flex-1 flex items-center justify-center gap-2 py-2 bg-white/5 hover:bg-white/10 rounded-xl transition-colors">
                       <Mail size={18} />
                     </a>
@@ -310,7 +310,7 @@ export default function About() {
                     Request a Prototype
                     <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
-                  <a href="#" 
+                  <a href="mailto:g.anirudh.sharma@gmail.com"
                      className="flex items-center gap-2 px-6 py-3 border border-white/20 rounded-full hover:bg-white/5 transition-all">
                     <Mail size={18} />
                     Get in Touch

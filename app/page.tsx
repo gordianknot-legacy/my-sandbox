@@ -235,14 +235,14 @@ export default function Home() {
             </div>
 
             {/* Contact Card */}
-            <div className="group rounded-3xl bg-gradient-to-br from-lime-950/30 to-zinc-950 border border-lime-400/20 p-6 hover:border-lime-400/40 transition-all duration-500 cursor-pointer">
+            <a href="mailto:g.anirudh.sharma@gmail.com" className="group rounded-3xl bg-gradient-to-br from-lime-950/30 to-zinc-950 border border-lime-400/20 p-6 hover:border-lime-400/40 transition-all duration-500 cursor-pointer block">
               <Mail className="text-lime-400 mb-4" size={28} />
               <h3 className="font-bold text-lg mb-2">Let&apos;s Connect</h3>
               <p className="text-sm text-zinc-500 mb-4">Open to opportunities and collaborations.</p>
               <div className="flex items-center gap-1 text-lime-400 text-sm font-medium group-hover:gap-2 transition-all">
                 Get in Touch <ChevronRight size={16} />
               </div>
-            </div>
+            </a>
 
             {/* Request Prototype CTA Card */}
             <div className="group rounded-3xl bg-gradient-to-br from-teal-950/30 to-zinc-950 border border-teal-400/20 p-6 hover:border-teal-400/40 transition-all duration-500 cursor-pointer">
