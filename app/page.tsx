@@ -87,7 +87,7 @@ export default function Home() {
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
             AI Sandbox for<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-emerald-400 to-teal-400">
-            Experiments  &amp; Prototypes
+           Prototyping
             </span>
           </h1>
           <p className="text-xl text-zinc-400 max-w-xl leading-relaxed mb-10">
