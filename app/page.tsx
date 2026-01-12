@@ -305,8 +305,8 @@ export default function Home() {
                     <Clock size={20} className="text-fuchsia-400" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Quick Turnaround</h4>
-                    <p className="text-sm text-zinc-500">Most prototypes delivered within 1-2 weeks depending on complexity.</p>
+                    <h4 className="font-semibold mb-1">Spread the Word</h4>
+                    <p className="text-sm text-zinc-500">Your prototype will be shared with the world.</p>
                   </div>
                 </div>
               </div>
@@ -388,24 +388,7 @@ export default function Home() {
                       placeholder="Tell me about your idea, the problem it solves, who it's for, and any specific features you have in mind..."
                     />
                   </div>
-
-                  <div>
-                    <label htmlFor="timeline" className="block text-sm font-medium text-zinc-300 mb-2">
-                      Timeline Preference
-                    </label>
-                    <select
-                      id="timeline"
-                      name="timeline"
-                      value={formData.timeline}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white focus:outline-none focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50 transition-all appearance-none cursor-pointer"
-                    >
-                      <option value="urgent">Urgent (1 week)</option>
-                      <option value="normal">Normal (2 weeks)</option>
-                      <option value="flexible">Flexible (3+ weeks)</option>
-                    </select>
-                  </div>
-
+            
                   <button
                     type="button"
                     onClick={handleSubmit}
