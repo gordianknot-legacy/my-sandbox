@@ -82,7 +82,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-3 mb-6">
             <div className="h-3 w-3 rounded-full bg-lime-400 animate-pulse" />
-            <span className="text-sm text-zinc-500 uppercase tracking-widest">Building in public</span>
+            <span className="text-sm text-zinc-500 uppercase tracking-widest">Building for the community</span>
           </div>
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
             AI Sandbox for<br />
