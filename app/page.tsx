@@ -224,8 +224,7 @@ export default function Home() {
                 <div className="flex-grow">
                   <h3 className="text-2xl font-bold mb-2">The Maker</h3>
                   <p className="text-zinc-400 mb-6 leading-relaxed">
-                    Diving deep into AI and white-label coding. This site is my journey to building impactful products 
-                    at the intersection of artificial intelligence and developer tools.
+                    Diving deep into AI and white-label coding. This site follows my journey of building pro bono solutions at the intersection of AI and real-world problem solving, using code as a tool to help move the needle for everyone.
                   </p>
                   <a href="/about" className="inline-flex items-center gap-2 px-4 py-2 bg-fuchsia-400/10 text-fuchsia-400 rounded-full text-sm font-medium hover:bg-fuchsia-400/20 transition-colors">
                     View Full Profile &amp; Resume <ArrowUpRight size={16} />
