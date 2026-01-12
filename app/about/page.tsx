@@ -145,11 +145,11 @@ export default function About() {
                 {/* Quick Stats */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-4 text-center">
-                    <div className="text-2xl font-bold text-lime-400">5+</div>
+                    <div className="text-2xl font-bold text-lime-400">6+</div>
                     <div className="text-xs text-zinc-500">Years Exp</div>
                   </div>
                   <div className="rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-4 text-center">
-                    <div className="text-2xl font-bold text-amber-400">20+</div>
+                    <div className="text-2xl font-bold text-amber-400">10+</div>
                     <div className="text-xs text-zinc-500">Projects</div>
                   </div>
                 </div>
