@@ -29,16 +29,16 @@ export default function Home() {
   const projects = [
     {
       id: 1,
-      title: "Project Snapshot Tool",
-      description: "White-label code snapshots powered by Gemini API. Embed anywhere.",
-      tags: ["Gemini", "React", "API"],
-      status: "Live",
+      title: "Carbon for AI",
+      description: "Tells you the amount of carbon emissions based on token usage.",
+      tags: [ "React", "WXT", "API"],
+      status: "WIP",
     },
     {
       id: 2,
-      title: "AI Context Engine",
-      description: "Intelligent context management for LLM applications.",
-      tags: ["LLM", "Python", "RAG"],
+      title: "CareerWatch",
+      description: "Intelligent career opportunities alert engine.",
+      tags: ["API", "Python", "RAG"],
       status: "Beta",
     },
     {
@@ -85,13 +85,13 @@ export default function Home() {
             <span className="text-sm text-zinc-500 uppercase tracking-widest">Building in public</span>
           </div>
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
-            AI Projects<br />
+            AI Sandbox for<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-emerald-400 to-teal-400">
-              &amp; Experiments
+            Experiments  &amp; Prototypes
             </span>
           </h1>
           <p className="text-xl text-zinc-400 max-w-xl leading-relaxed mb-10">
-            A sandbox for white-label coding tools and AI experiments. 
+            A space for AI experiments and prototyping. 
             Part repository, part portfolio, all curiosity.
           </p>
           <div className="flex flex-wrap gap-4">
