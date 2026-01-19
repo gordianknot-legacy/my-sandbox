@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Github, ExternalLink, Mail, ArrowUpRight, Sparkles, ChevronRight, Send, Lightbulb, Zap, Clock, Code } from 'lucide-react';
+import { Github, Linkedin, ExternalLink, Mail, ArrowUpRight, Sparkles, ChevronRight, Send, Lightbulb, Zap, Clock, Code, Briefcase } from 'lucide-react';
 
 export default function Home() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -13,17 +13,90 @@ export default function Home() {
     timeline: 'flexible'
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case 'name':
+        if (!value.trim()) return 'Name is required';
+        if (value.trim().length < 2) return 'Name must be at least 2 characters';
+        return '';
+      case 'email':
+        if (!value.trim()) return 'Email is required';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Please enter a valid email address';
+        return '';
+      case 'ideaTitle':
+        if (!value.trim()) return 'Idea title is required';
+        if (value.trim().length < 3) return 'Title must be at least 3 characters';
+        return '';
+      case 'description':
+        if (!value.trim()) return 'Description is required';
+        if (value.trim().length < 20) return 'Please provide at least 20 characters';
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {};
+    Object.entries(formData).forEach(([key, value]) => {
+      const error = validateField(key, value);
+      if (error) errors[key] = error;
+    });
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (fieldErrors[name]) {
+      setFieldErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    if (error) {
+      setFieldErrors(prev => ({ ...prev, [name]: error }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 5000);
+    setFormError('');
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/prototype-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit request');
+      }
+
+      setFormSubmitted(true);
+      setFormData({ name: '', email: '', ideaTitle: '', description: '', timeline: 'flexible' });
+      setTimeout(() => setFormSubmitted(false), 5000);
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const projects = [
@@ -53,9 +126,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a0b] text-white font-sans selection:bg-lime-400 selection:text-black">
       {/* Grain overlay */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.015]" 
+      <div className="fixed inset-0 pointer-events-none opacity-[0.015]"
            style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")'}} />
-      
+
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#0a0a0b]/80 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -65,9 +138,8 @@ export default function Home() {
           <div className="flex items-center gap-6">
             <a href="#projects" className="text-sm text-zinc-400 hover:text-white transition-colors">Projects</a>
             <a href="#prototype-request" className="text-sm text-zinc-400 hover:text-white transition-colors">Request Prototype</a>
-            <a href="/about" className="text-sm text-zinc-400 hover:text-white transition-colors">About</a>
-            <a href="https://github.com/gordianknot-legacy/my-sandbox" 
-               target="_blank" 
+            <a href="https://github.com/gordianknot-legacy/my-sandbox"
+               target="_blank"
                rel="noopener noreferrer"
                className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-full text-sm transition-all border border-white/10 hover:border-white/20">
               <Github size={16} />
@@ -91,16 +163,16 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-xl text-zinc-400 max-w-xl leading-relaxed mb-10">
-            A space for AI experiments and prototyping. 
+            A space for AI experiments and prototyping.
             Part repository, part portfolio, all curiosity.
           </p>
           <div className="flex flex-wrap gap-4">
-            <a href="#projects" 
+            <a href="#projects"
                className="group flex items-center gap-2 px-6 py-3 bg-lime-400 text-black font-bold rounded-full hover:bg-lime-300 transition-all">
               Explore Projects
               <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
-            <a href="#prototype-request" 
+            <a href="#prototype-request"
                className="flex items-center gap-2 px-6 py-3 border border-white/20 rounded-full hover:bg-white/5 transition-all">
               Request a Prototype
             </a>
@@ -112,7 +184,7 @@ export default function Home() {
       <main className="px-6 pb-20" id="projects">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]">
-            
+
             {/* Featured Project - Large */}
             <div className="lg:col-span-2 lg:row-span-2 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-8 hover:border-lime-400/30 transition-all duration-500">
               <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-lime-400/20 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -152,8 +224,8 @@ export default function Home() {
 
             {/* GitHub Stats Card */}
             <div className="group rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-6 hover:border-amber-400/30 transition-all duration-500">
-              <a href="https://github.com/gordianknot-legacy/my-sandbox" 
-                 target="_blank" 
+              <a href="https://github.com/gordianknot-legacy/my-sandbox"
+                 target="_blank"
                  rel="noopener noreferrer"
                  className="h-full flex flex-col">
                 <Github className="text-amber-400 mb-4" size={28} />
@@ -189,7 +261,7 @@ export default function Home() {
 
             {/* Project Cards */}
             {projects.slice(1).map((project) => (
-              <div 
+              <div
                 key={project.id}
                 className="group rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-6 hover:border-white/20 transition-all duration-500 cursor-pointer"
                 onMouseEnter={() => setHoveredProject(project.id)}
@@ -226,19 +298,43 @@ export default function Home() {
                   <p className="text-zinc-400 mb-6 leading-relaxed">
                     Diving deep into AI and white-label coding. This site follows my journey of building pro bono solutions at the intersection of AI and real-world problem solving, using code as a tool to help move the needle for everyone.
                   </p>
-                  <a href="/about" className="inline-flex items-center gap-2 px-4 py-2 bg-fuchsia-400/10 text-fuchsia-400 rounded-full text-sm font-medium hover:bg-fuchsia-400/20 transition-colors">
-                    View Full Profile &amp; Resume <ArrowUpRight size={16} />
-                  </a>
+                  <div className="flex gap-3">
+                    <a href="https://linkedin.com/in/yourusername"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="flex items-center justify-center w-10 h-10 bg-fuchsia-400/10 text-fuchsia-400 rounded-xl hover:bg-fuchsia-400/20 transition-colors">
+                      <Linkedin size={20} />
+                    </a>
+                    <a href="https://github.com/gordianknot-legacy"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="flex items-center justify-center w-10 h-10 bg-fuchsia-400/10 text-fuchsia-400 rounded-xl hover:bg-fuchsia-400/20 transition-colors">
+                      <Github size={20} />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
+            {/* CareerWatch Card */}
+            <a href="https://careerwatch.whybe.ai"
+               target="_blank"
+               rel="noopener noreferrer"
+               className="group rounded-3xl bg-gradient-to-br from-lime-950/30 to-zinc-950 border border-lime-400/20 p-6 hover:border-lime-400/40 transition-all duration-500 cursor-pointer block">
+              <Briefcase className="text-lime-400 mb-4" size={28} />
+              <h3 className="font-bold text-lg mb-2">CareerWatch</h3>
+              <p className="text-sm text-zinc-500 mb-4">Get alerts when companies post new jobs.</p>
+              <div className="flex items-center gap-1 text-lime-400 text-sm font-medium group-hover:gap-2 transition-all">
+                Try It <ChevronRight size={16} />
+              </div>
+            </a>
+
             {/* Contact Card */}
-            <a href="mailto:g.anirudh.sharma@gmail.com" className="group rounded-3xl bg-gradient-to-br from-lime-950/30 to-zinc-950 border border-lime-400/20 p-6 hover:border-lime-400/40 transition-all duration-500 cursor-pointer block">
-              <Mail className="text-lime-400 mb-4" size={28} />
+            <a href="mailto:g.anirudh.sharma@gmail.com" className="group rounded-3xl bg-gradient-to-br from-cyan-950/30 to-zinc-950 border border-cyan-400/20 p-6 hover:border-cyan-400/40 transition-all duration-500 cursor-pointer block">
+              <Mail className="text-cyan-400 mb-4" size={28} />
               <h3 className="font-bold text-lg mb-2">Let&apos;s Connect</h3>
               <p className="text-sm text-zinc-500 mb-4">Open to opportunities and collaborations.</p>
-              <div className="flex items-center gap-1 text-lime-400 text-sm font-medium group-hover:gap-2 transition-all">
+              <div className="flex items-center gap-1 text-cyan-400 text-sm font-medium group-hover:gap-2 transition-all">
                 Get in Touch <ChevronRight size={16} />
               </div>
             </a>
@@ -263,7 +359,7 @@ export default function Home() {
       <section id="prototype-request" className="px-6 py-24 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
-            
+
             {/* Left Column - Info */}
             <div>
               <div className="flex items-center gap-3 mb-6">
@@ -279,7 +375,7 @@ export default function Home() {
               <p className="text-lg text-zinc-400 mb-8 leading-relaxed">
                 Have a concept for an AI-powered tool or application? I&apos;ll build a working prototype to help you validate your idea and explore possibilities.
               </p>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="p-2 bg-white/5 rounded-lg shrink-0">
@@ -334,10 +430,17 @@ export default function Home() {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50 transition-all"
+                        onBlur={handleBlur}
+                        className={`w-full px-4 py-3 bg-black/50 border rounded-xl text-white placeholder-zinc-600 focus:outline-none transition-all ${
+                          fieldErrors.name
+                            ? 'border-red-500/50 focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50'
+                            : 'border-white/10 focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50'
+                        }`}
                         placeholder="John Doe"
                       />
+                      {fieldErrors.name && (
+                        <p className="mt-1 text-sm text-red-400">{fieldErrors.name}</p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-2">
@@ -349,10 +452,17 @@ export default function Home() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50 transition-all"
+                        onBlur={handleBlur}
+                        className={`w-full px-4 py-3 bg-black/50 border rounded-xl text-white placeholder-zinc-600 focus:outline-none transition-all ${
+                          fieldErrors.email
+                            ? 'border-red-500/50 focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50'
+                            : 'border-white/10 focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50'
+                        }`}
                         placeholder="john@example.com"
                       />
+                      {fieldErrors.email && (
+                        <p className="mt-1 text-sm text-red-400">{fieldErrors.email}</p>
+                      )}
                     </div>
                   </div>
 
@@ -366,10 +476,17 @@ export default function Home() {
                       name="ideaTitle"
                       value={formData.ideaTitle}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50 transition-all"
+                      onBlur={handleBlur}
+                      className={`w-full px-4 py-3 bg-black/50 border rounded-xl text-white placeholder-zinc-600 focus:outline-none transition-all ${
+                        fieldErrors.ideaTitle
+                          ? 'border-red-500/50 focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50'
+                          : 'border-white/10 focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50'
+                      }`}
                       placeholder="AI-Powered Recipe Generator"
                     />
+                    {fieldErrors.ideaTitle && (
+                      <p className="mt-1 text-sm text-red-400">{fieldErrors.ideaTitle}</p>
+                    )}
                   </div>
 
                   <div>
@@ -381,20 +498,34 @@ export default function Home() {
                       name="description"
                       value={formData.description}
                       onChange={handleInputChange}
-                      required
+                      onBlur={handleBlur}
                       rows={5}
-                      className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50 transition-all resize-none"
+                      className={`w-full px-4 py-3 bg-black/50 border rounded-xl text-white placeholder-zinc-600 focus:outline-none transition-all resize-none ${
+                        fieldErrors.description
+                          ? 'border-red-500/50 focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50'
+                          : 'border-white/10 focus:border-teal-400/50 focus:ring-1 focus:ring-teal-400/50'
+                      }`}
                       placeholder="Tell me about your idea, the problem it solves, who it's for, and any specific features you have in mind..."
                     />
+                    {fieldErrors.description && (
+                      <p className="mt-1 text-sm text-red-400">{fieldErrors.description}</p>
+                    )}
                   </div>
-            
+
+                  {formError && (
+                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
+                      {formError}
+                    </div>
+                  )}
+
                   <button
                     type="button"
                     onClick={handleSubmit}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-teal-400 to-cyan-400 text-black font-bold rounded-xl hover:from-teal-300 hover:to-cyan-300 transition-all"
+                    disabled={isSubmitting}
+                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-teal-400 to-cyan-400 text-black font-bold rounded-xl hover:from-teal-300 hover:to-cyan-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Submit Request
-                    <Send size={18} />
+                    {isSubmitting ? 'Submitting...' : 'Submit Request'}
+                    {!isSubmitting && <Send size={18} />}
                   </button>
 
                   <p className="text-xs text-zinc-600 text-center">
@@ -417,7 +548,7 @@ export default function Home() {
             "Any sufficiently advanced technology is indistinguishable from magic." — Arthur C. Clarke • Status: <span className="text-lime-400">Constantly Evolving</span>
           </div>
           <div className="flex gap-4">
-            <a href="https://github.com/gordianknot-legacy/my-sandbox" 
+            <a href="https://github.com/gordianknot-legacy/my-sandbox"
                target="_blank"
                rel="noopener noreferrer"
                className="p-2 hover:bg-white/5 rounded-lg transition-colors text-zinc-500 hover:text-white">
