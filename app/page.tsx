@@ -194,26 +194,28 @@ export default function Home() {
                     Featured
                   </span>
                   <div className="flex gap-2">
-                    <a href="#" className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                    <a href="https://github.com/gordianknot-legacy/my-sandbox" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-white/10 rounded-lg transition-colors">
                       <Github size={18} />
                     </a>
-                    <a href="#" className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                    <a href="https://careerwatch.whybe.ai" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-white/10 rounded-lg transition-colors">
                       <ExternalLink size={18} />
                     </a>
                   </div>
                 </div>
-                <h3 className="text-3xl font-bold mb-3">Project Snapshot Tool</h3>
+                <h3 className="text-3xl font-bold mb-3">CareerWatch</h3>
                 <p className="text-zinc-400 mb-6 flex-grow">
-                  An embedded prototype for white-labeling code snapshots. Built with Gemini API for intelligent code analysis and presentation.
+                  Intelligent career opportunities alert engine. Powered by AI to help you find the right opportunities at the right time.
                 </p>
-                <div className="w-full h-48 bg-black/50 rounded-2xl border border-white/5 flex items-center justify-center group-hover:border-lime-400/20 transition-colors">
-                  <div className="text-center">
-                    <Sparkles className="mx-auto mb-2 text-lime-400" size={24} />
-                    <span className="text-zinc-500 text-sm">Live Preview</span>
-                  </div>
+                <div className="w-full h-48 bg-black/50 rounded-2xl border border-white/5 overflow-hidden group-hover:border-lime-400/20 transition-colors">
+                  <iframe
+                    src="https://careerwatch.whybe.ai"
+                    title="CareerWatch Live Preview"
+                    className="w-full h-full border-0 pointer-events-none"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="flex flex-wrap gap-2 mt-6">
-                  {["Gemini", "React", "TypeScript", "API"].map(tag => (
+                  {["API", "Python", "RAG", "AI"].map(tag => (
                     <span key={tag} className="px-3 py-1 bg-white/5 text-xs text-zinc-400 rounded-full">
                       {tag}
                     </span>
@@ -260,39 +262,59 @@ export default function Home() {
             </div>
 
             {/* Project Cards */}
-            {projects.slice(1).map((project) => (
-              <div
-                key={project.id}
-                className="group rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-6 hover:border-white/20 transition-all duration-500 cursor-pointer"
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`px-2 py-1 text-xs font-bold rounded-full ${
-                    project.status === 'Beta' ? 'bg-amber-400/10 text-amber-400' : 'bg-fuchsia-400/10 text-fuchsia-400'
-                  }`}>
-                    {project.status}
-                  </span>
-                  <ExternalLink size={16} className="text-zinc-600 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="font-bold text-lg mb-2">{project.title}</h3>
-                <p className="text-sm text-zinc-500 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-1">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="px-2 py-0.5 bg-white/5 text-[10px] text-zinc-500 rounded-full">
-                      {tag}
+            {projects.slice(1).map((project) => {
+              const cardContent = (
+                <>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className={`px-2 py-1 text-xs font-bold rounded-full ${
+                      project.status === 'Beta' ? 'bg-amber-400/10 text-amber-400' : 'bg-fuchsia-400/10 text-fuchsia-400'
+                    }`}>
+                      {project.status}
                     </span>
-                  ))}
+                    <ExternalLink size={16} className="text-zinc-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">{project.title}</h3>
+                  <p className="text-sm text-zinc-500 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="px-2 py-0.5 bg-white/5 text-[10px] text-zinc-500 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              );
+
+              const link = project.title === 'CareerWatch' ? 'https://careerwatch.whybe.ai' : undefined;
+
+              return link ? (
+                <a
+                  key={project.id}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-6 hover:border-white/20 transition-all duration-500 cursor-pointer"
+                  onMouseEnter={() => setHoveredProject(project.id)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  {cardContent}
+                </a>
+              ) : (
+                <div
+                  key={project.id}
+                  className="group rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/5 p-6 hover:border-white/20 transition-all duration-500 cursor-pointer"
+                  onMouseEnter={() => setHoveredProject(project.id)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  {cardContent}
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             {/* About Preview Card */}
             <div className="lg:col-span-2 rounded-3xl bg-gradient-to-br from-fuchsia-950/30 via-zinc-950 to-zinc-950 border border-white/5 p-8 hover:border-fuchsia-400/30 transition-all duration-500">
               <div className="flex items-start gap-6">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-fuchsia-400 to-purple-600 flex items-center justify-center text-3xl font-black shrink-0">
-                  W
-                </div>
+                <img src="/maker-photo.jpg" alt="The Maker" className="w-20 h-20 rounded-2xl object-cover shrink-0" />
                 <div className="flex-grow">
                   <h3 className="text-2xl font-bold mb-2">The Maker</h3>
                   <p className="text-zinc-400 mb-6 leading-relaxed">
