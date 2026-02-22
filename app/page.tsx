@@ -362,7 +362,7 @@ export default function Home() {
                 <div className="flex-grow">
                   <h3 className="text-2xl font-bold mb-2">The Maker</h3>
                   <p className="text-zinc-400 mb-6 leading-relaxed">
-                    Diving deep into AI and white-label coding. This site follows my journey of building pro bono solutions at the intersection of AI and real-world problem solving, using code as a tool to help move the needle for everyone.
+                      I&apos;m Anirudh — diving deep into AI and white-label coding (send snacks). This site tracks my quest to build pro bono solutions where AI meets real-world problems — using code to move the needle, preferably forward! Expect smart builds, useful experiments, and the occasional &quot;well, that compiled differently yesterday.&quot;
                   </p>
                   <div className="flex gap-3">
                     <a href="https://linkedin.com/in/anirudh-g"
@@ -386,7 +386,7 @@ export default function Home() {
             <a href="mailto:g.anirudh.sharma@gmail.com" className="group rounded-3xl bg-gradient-to-br from-cyan-950/30 to-zinc-950 border border-cyan-400/20 p-6 hover:border-cyan-400/40 transition-all duration-500 cursor-pointer block">
               <Mail className="text-cyan-400 mb-4" size={28} />
               <h3 className="font-bold text-lg mb-2">Let&apos;s Connect</h3>
-              <p className="text-sm text-zinc-500 mb-4">Open to opportunities and collaborations.</p>
+              <p className="text-sm text-zinc-500 mb-4">Have questions? Always down for a coffee chat.</p>
               <div className="flex items-center gap-1 text-cyan-400 text-sm font-medium group-hover:gap-2 transition-all">
                 Get in Touch <ChevronRight size={16} />
               </div>
