@@ -299,7 +299,7 @@ export default function Home() {
                     Diving deep into AI and white-label coding. This site follows my journey of building pro bono solutions at the intersection of AI and real-world problem solving, using code as a tool to help move the needle for everyone.
                   </p>
                   <div className="flex gap-3">
-                    <a href="https://linkedin.com/in/yourusername"
+                    <a href="https://linkedin.com/in/anirudh-g"
                        target="_blank"
                        rel="noopener noreferrer"
                        className="flex items-center justify-center w-10 h-10 bg-fuchsia-400/10 text-fuchsia-400 rounded-xl hover:bg-fuchsia-400/20 transition-colors">
