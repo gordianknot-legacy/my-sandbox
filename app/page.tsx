@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, ExternalLink, Mail, ArrowUpRight, Sparkles, ChevronRight, Send, Lightbulb, Zap, Clock, Code, Briefcase } from 'lucide-react';
 
 export default function Home() {
@@ -16,6 +16,28 @@ export default function Home() {
   const [formError, setFormError] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [systemStatus, setSystemStatus] = useState<{
+    status: string;
+    checks: Record<string, string>;
+    lastDeploy: string | null;
+  }>({ status: 'loading', checks: {}, lastDeploy: null });
+
+  useEffect(() => {
+    fetch('/api/health')
+      .then(res => res.json())
+      .then(data => setSystemStatus(data))
+      .catch(() => setSystemStatus({ status: 'offline', checks: {}, lastDeploy: null }));
+  }, []);
+
+  const formatTimeAgo = (dateStr: string) => {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 60) return `${mins}m ago`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    return `${days}d ago`;
+  };
 
   const validateField = (name: string, value: string): string => {
     switch (name) {
@@ -240,23 +262,45 @@ export default function Home() {
             </div>
 
             {/* Status Card */}
-            <div className="rounded-3xl bg-gradient-to-br from-emerald-950/50 to-zinc-950 border border-emerald-500/20 p-6">
+            <div className={`rounded-3xl bg-gradient-to-br ${
+              systemStatus.status === 'operational' ? 'from-emerald-950/50 to-zinc-950 border-emerald-500/20' :
+              systemStatus.status === 'loading' ? 'from-zinc-900 to-zinc-950 border-zinc-500/20' :
+              'from-red-950/50 to-zinc-950 border-red-500/20'
+            } border p-6`}>
               <div className="flex items-center gap-2 mb-4">
-                <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-emerald-400 text-sm font-medium">All Systems Operational</span>
+                <div className={`h-2 w-2 rounded-full animate-pulse ${
+                  systemStatus.status === 'operational' ? 'bg-emerald-400' :
+                  systemStatus.status === 'loading' ? 'bg-zinc-400' :
+                  'bg-red-400'
+                }`} />
+                <span className={`text-sm font-medium ${
+                  systemStatus.status === 'operational' ? 'text-emerald-400' :
+                  systemStatus.status === 'loading' ? 'text-zinc-400' :
+                  'text-red-400'
+                }`}>
+                  {systemStatus.status === 'operational' ? 'All Systems Operational' :
+                   systemStatus.status === 'loading' ? 'Checking...' :
+                   systemStatus.status === 'degraded' ? 'Partial Outage' : 'Systems Offline'}
+                </span>
               </div>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-500">API Status</span>
-                  <span className="text-emerald-400">Online</span>
+                  <span className="text-zinc-500">API</span>
+                  <span className={systemStatus.checks.api === 'online' ? 'text-emerald-400' : 'text-red-400'}>
+                    {systemStatus.checks.api === 'online' ? 'Online' : systemStatus.status === 'loading' ? '...' : 'Offline'}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-zinc-500">CareerWatch</span>
+                  <span className={systemStatus.checks.careerwatch === 'online' ? 'text-emerald-400' : systemStatus.checks.careerwatch === 'degraded' ? 'text-amber-400' : systemStatus.status === 'loading' ? 'text-zinc-400' : 'text-red-400'}>
+                    {systemStatus.checks.careerwatch === 'online' ? 'Online' : systemStatus.checks.careerwatch === 'degraded' ? 'Degraded' : systemStatus.status === 'loading' ? '...' : 'Offline'}
+                  </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-zinc-500">Last Deploy</span>
-                  <span className="text-zinc-300">2h ago</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-zinc-500">Uptime</span>
-                  <span className="text-zinc-300">99.9%</span>
+                  <span className="text-zinc-300">
+                    {systemStatus.lastDeploy ? formatTimeAgo(systemStatus.lastDeploy) : '...'}
+                  </span>
                 </div>
               </div>
             </div>
