@@ -316,19 +316,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* CareerWatch Card */}
-            <a href="https://careerwatch.whybe.ai"
-               target="_blank"
-               rel="noopener noreferrer"
-               className="group rounded-3xl bg-gradient-to-br from-lime-950/30 to-zinc-950 border border-lime-400/20 p-6 hover:border-lime-400/40 transition-all duration-500 cursor-pointer block">
-              <Briefcase className="text-lime-400 mb-4" size={28} />
-              <h3 className="font-bold text-lg mb-2">CareerWatch</h3>
-              <p className="text-sm text-zinc-500 mb-4">Get alerts when companies post new jobs.</p>
-              <div className="flex items-center gap-1 text-lime-400 text-sm font-medium group-hover:gap-2 transition-all">
-                Try It <ChevronRight size={16} />
-              </div>
-            </a>
-
             {/* Contact Card */}
             <a href="mailto:g.anirudh.sharma@gmail.com" className="group rounded-3xl bg-gradient-to-br from-cyan-950/30 to-zinc-950 border border-cyan-400/20 p-6 hover:border-cyan-400/40 transition-all duration-500 cursor-pointer block">
               <Mail className="text-cyan-400 mb-4" size={28} />
