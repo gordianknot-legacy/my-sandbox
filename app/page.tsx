@@ -362,7 +362,7 @@ export default function Home() {
                 <div className="flex-grow">
                   <h3 className="text-2xl font-bold mb-2">The Maker</h3>
                   <p className="text-zinc-400 mb-6 leading-relaxed">
-                      I&apos;m Anirudh — diving deep into AI and white-label coding (send snacks). This site tracks my quest to build pro bono solutions where AI meets real-world problems — using code to move the needle, preferably forward! Expect smart builds, useful experiments, and the occasional &quot;well, that compiled differently yesterday.&quot;
+                      I&apos;m Anirudh. Diving deep into AI and white-label coding (send snacks). This page tracks my quest to build pro bono solutions where AI meets real-world problems, using code to move the needle (preferably forward)! Expect smart builds, useful experiments, and the occasional &quot;well, that compiled differently yesterday.&quot;
                   </p>
                   <div className="flex gap-3">
                     <a href="https://linkedin.com/in/anirudh-g"
